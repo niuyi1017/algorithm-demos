@@ -1,0 +1,45 @@
+extends ../layout
+block content 
+  .container
+    .row.justify-content-center
+      .col-12 
+        p &nbsp;
+    .row.justify-content-center
+      .col-12 
+        p &nbsp;
+    .row.justify-content-end.admin-adduser
+      .col-2
+        button.btn.btn-outline-dark.btn-block 刷 新
+      .col-2
+        button.btn.btn-outline-dark.btn-block 新 增 
+    .row.justify-content-center
+      .col-12 
+        table.table.table-hover.table-dark.table-striped.mytable
+          thead 
+            th LID
+            th 定位日期
+            th 定位时间
+            th 状态
+            th 详细信息
+            th 删除
+          tbody
+            each item in users 
+              tr(class="item-id-#{item._id}")
+                td #{item.lid}
+                td #{moment(item.meta.updateAt).format('YYYY/MM/DD')}
+                td #{moment(item.meta.updateAt).format('h:mm:ss a')}
+                td 
+                  if item.state == 0 
+                    p.text-warning 定位中...
+                  else 
+                    p.text-success 已完成！
+                td: a(target="_blank",href="../../movie/#{item._id}") 点击查看
+                td 
+                  button.btn.btn-danger.btn-sm.del(type="button",data-id="#{item._id}") 删除
+    .row
+      .col-12 
+        span &nbsp;
+    .row
+      .col-12 
+        span &nbsp;
+  script(src="/js/admin.js")

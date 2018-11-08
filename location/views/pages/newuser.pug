@@ -1,0 +1,37 @@
+extends ../layout
+block content 
+  .container.my-xl-5
+    .row.justify-content-center
+        .col-12 
+          p &nbsp;
+    .row.justify-content-center
+        .col-12 
+          p &nbsp;
+    .row.justify-content-center
+      .col-6
+        form.form-horizonal(action="/admin/new", method="post", enctype="multipart/form-data")
+          if user._id
+            input(type="hidden",name="movie[_id]",value=user._id)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputTitle") UID
+            .col-sm-10
+              input#inputTitle.form-control(type="text", name="user[uid]", value=user.uid)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputPassword") 密码
+            .col-sm-10
+              input#inputDirector.form-control(type="text", name="user[password]", value=user.director)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputState") 状态
+            .col-sm-10
+              input#inputCountry.form-control(type="text", name="user[state]", value=user.state)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputNotice") 备注
+            .col-sm-10
+              input#inputLanguage.form-control(type="text", name="user[notice]", value=user.notice)
+          .form-group.row.justify-content-center
+            .col-sm-offset-2.col-sm-6
+              button.btn.btn-outline-secondary.btn-block(type="submit") 录 入
+    .row
+      .col-12 &nbsp;
+      .col-12 &nbsp;
+  script(src="/js/admin.js")

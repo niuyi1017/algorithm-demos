@@ -1,0 +1,36 @@
+extends ../layout
+block content 
+  .container
+    .row.justify-content-center
+      .col-12 
+        p &nbsp;
+    .row.justify-content-center
+      .col-12 
+        p &nbsp;
+    .row.justify-content-center
+      .col-12 
+        p &nbsp;
+    .row
+      .col-7
+        #location
+      .col-5
+        dl.dl-horizontal
+          dt 国家
+          dd=location.country
+          dt 省/自治区/直辖市
+          dd=location.province
+          dt 城市
+          dd=location.city
+          dt 街区
+          dd=location.district
+          dt 邮编
+          dd=location.postcode
+          dt 详细地址
+          dd=location.detial
+    .row
+      .col-12 &nbsp;
+      .col-12 &nbsp;
+  script(src="/js/detail.js")
+  
+
+         
