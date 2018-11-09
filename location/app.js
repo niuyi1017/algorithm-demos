@@ -137,6 +137,8 @@ app.get('/admin', (req, res) => {
 app.get('/locationlist', (req, res) => {
   res.render('locationlist', {
     title: 'location admin',
+    user: {},
+    location:{},
     users: [
       {
         lid: '1001001',
@@ -217,6 +219,20 @@ app.get('/newuser', (req, res) => {
   res.render('newuser', {
     title: 'location new user',
     user: {}
+  })
+})
+app.get('/newlocation', (req, res) => {
+  res.render('newlocation', {
+    title: 'location new location',
+    user: {},
+    location: {}
+  })
+})
+app.get('/locateuser', (req, res) => {
+  res.render('locateuser', {
+    title: 'location new locateuser',
+    user: {},
+    location: {}
   })
 })
 console.log('node-mongodb started on port: ' + port)  

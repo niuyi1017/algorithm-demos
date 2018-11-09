@@ -1,0 +1,32 @@
+extends ../layout
+block content 
+  #newlocation-banner
+  .container.my-xl-5
+    .row.justify-content-center
+        .col-12 
+          p &nbsp;
+    .row.justify-content-center
+        .col-12 
+          p &nbsp;
+    .row.justify-content-center
+        .col-12 
+          p &nbsp;
+    .row.justify-content-center
+      .col-6.newuser
+        form.form-horizonal(action="/admin/new", method="post")
+          if location._id
+            input(type="hidden",name="location[_id]",value=location._id)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputUid") UID
+            .col-sm-10
+              input#inputUid.form-control(type="text", name="user[lid]", value=user.lid, readonly)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputLid") LID
+            .col-sm-10
+              input#inputLid.form-control(type="text", name="location[lid]", value=location.lid)
+          .form-group.row.justify-content-center
+            .col-12
+              p &nbsp;
+            .col-sm-offset-2.col-sm-6
+              button.btn.btn-outline-secondary.btn-block(type="submit") 录 入
+  script(src="/js/admin.js")

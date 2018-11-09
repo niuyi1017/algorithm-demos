@@ -11,7 +11,7 @@ block content
       .col-2
         button.btn.btn-outline-dark.btn-block 刷 新
       .col-2
-        button.btn.btn-outline-dark.btn-block 新 增 
+        button.btn.btn-outline-dark.btn-block(data-toggle="modal", data-target="#newlocationModal") 新 增 
     .row.justify-content-center
       .col-12 
         table.table.table-hover.table-dark.table-striped.mytable
@@ -33,13 +33,49 @@ block content
                     p.text-warning 定位中...
                   else 
                     p.text-success 已完成！
-                td: a(target="_blank",href="../../movie/#{item._id}") 点击查看
+                if item.state == 0 
+                  td: a.btn.btn-outline-secondary.btn-sm.disabled(target="_blank",href="../../movie/#{item._id}") 请 稍 后...
+                else 
+                  td: a.btn.btn-outline-warning.btn-sm(target="_blank",href="../../movie/#{item._id}") 点击查看
                 td 
-                  button.btn.btn-danger.btn-sm.del(type="button",data-id="#{item._id}") 删除
+                  button.btn.btn-outline-danger.btn-sm.del(type="button",data-id="#{item._id}")  删 &nbsp; 除
     .row
       .col-12 
         span &nbsp;
     .row
       .col-12 
         span &nbsp;
+  #newlocationModal.modal.fade(role="dialog")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        form(action="/user/signup", method="post")
+          .modal-header.justify-content-center
+            h5.modal-title#modal-title 新增定位
+          .modal-body.newlocation
+            .form-group.row
+              label.col-sm-2.col-form-label(for="inputUid") UID
+              .col-sm-10
+                input#inputUid.form-control(type="text", name="user[lid]", value=user.lid, readonly)
+            .form-group.row
+              label.col-sm-2.col-form-label(for="inputLid") LID
+              .col-sm-10
+                input#inputLid.form-control(type="text", name="location[lid]", value=location.lid)
+          .row.justify-content-center
+            .col-6
+              button.btn.btn-outline-secondary.btn-block(type="submit") 一键生成专属定位链接
+          .row.justify-content-center
+            .col-12 
+              p
+          .row.justify-content-center
+            .col-auto 
+              .loading
+          .row.justify-content-center
+            .col-10
+              textarea.form-control(rows="2") https://www.tianxiayijiaqin.com/location/locateuser?uid=1001&lid=011
+          .row.justify-content-center
+            .col-12 
+              p
+          .row.justify-content-center
+            .col-12 
+              p
   script(src="/js/admin.js")
