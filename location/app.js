@@ -235,4 +235,10 @@ app.get('/locateuser', (req, res) => {
     location: {}
   })
 })
+
+app.post('/recLocation', (req, res) => {
+  let locationData = req.body.dataStr.formattedAddress
+  res.send(locationData)
+  console.log(locationData)
+})
 console.log('node-mongodb started on port: ' + port)  

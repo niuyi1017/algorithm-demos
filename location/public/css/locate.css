@@ -1,23 +1,51 @@
-@keyframes logo-rotate
-{
-  from {transform: rotate(0);}
-  to  {transform: rotate(360deg);}
+@keyframes logo-rotate {
+  from {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
 }
-@-webkit-keyframes logo-rotate /* Safari ä¸Ž Chrome */
-{
-  from {transform: rotate(0);}
-  to  {transform: rotate(360deg);}
+
+@-webkit-keyframes logo-rotate
+/* Safari ä¸Ž Chrome */
+
+  {
+  from {
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    -ms-transform: rotate(0);
+    -o-transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
 }
-#bg{
+
+#bg {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: #252a32;
   z-index: -1;
 }
-#header{
+
+#header {
   height: 60px;
   background: #1d2128;
   line-height: 60px;
@@ -27,24 +55,27 @@
   font-size: 18px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
 #logo {
   display: flex;
   justify-content: center;
   margin: 50px 0 20px;
 }
-#logo .logo-wrapper{
-   animation-name: logo-rotate;
-    animation-duration: 5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-play-state: running;
-    -webkit-animation-name: logo-rotate;
-    -webkit-animation-duration: 10s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-play-state: running;
+
+#logo .logo-wrapper {
+  animation-name: logo-rotate;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  -webkit-animation-name: logo-rotate;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-play-state: running;
 }
-#headline  {
+
+#headline {
   height: 30px;
   line-height: 30px;
   text-align: center;
@@ -53,76 +84,191 @@
   font-family: 'Times New Roman', Times, serif;
   letter-spacing: 2px;
 }
-#form{
+
+#form {
   margin: 20px;
 }
-.country,.mobile,.wraning,#gps-btn{
+
+.country,
+.mobile,
+.wraning,
+#gps-btn {
   display: flex;
   justify-content: center;
   height: 30px;
   line-height: 30px;
   margin: 10px 0;
 }
-.label{
+
+.label {
   color: #fefefe;
   font-size: 16px;
   letter-spacing: 2px;
   margin: 0 20px;
 }
-.label-wraning{
-  color:#fd4e67;
+
+.label-wraning {
+  color: #fd4e67;
   font-size: 12px;
   margin: 0 20px;
-  
 }
-select,input{
+
+select,
+input {
   border-radius: 5px;
-  border:1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   outline: none;
   height: 30px;
   padding: 3px 10px;
   color: #fd4e67;
   background: #252a32;
   width: 45%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) 
-
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
-option{
-  appearance:none;
-	-moz-appearance:none; 
-	-webkit-appearance:none;
+
+option {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
   border-radius: 5px;
-  border:1px solid #1d2128;
+  border: 1px solid #1d2128;
   outline: none;
   padding: 25px;
   width: 40%;
-  
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
-#gps-btn .gps-btn{
-  border: 2px solid  #fd4e67;
+#gps-btn .gps-btn {
+  border: 2px solid #fd4e67;
   border-radius: 15px;
   color: #fff;
   box-shadow: 0 3px 150px #fd4e67bd;
-  margin: 10px 20px;  
+  margin: 10px 20px;
   height: 40px;
   width: 50%;
   background: transparent;
   letter-spacing: 2px;
-  transition-duration: 0.3s;
+  transition: all ease 0.3s;
   outline: none;
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  -ms-transition: all ease 0.3s;
+  -o-transition: all ease 0.3s;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
-#gps-btn .gps-btn:hover{
-  
+
+#gps-btn .gps-btn:hover {
   color: #FFF;
   box-shadow: 0 0 5px #fd4e67;
-  margin: 10px 20px;  
+  margin: 10px 20px;
   background: #fd4e67;
 }
-#gps-btn .gps-btn:active{
-  
+
+#gps-btn .gps-btn:active {
   color: #FFF;
   box-shadow: 0 0 5px #fd4e67;
-  margin: 10px 20px;  
+  margin: 10px 20px;
   background: #fd4e67;
+}
+
+#map {
+  display: none
+}
+
+#mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mask #alert {
+  width: 70%;
+  /*border: 1px solid #fd4e67;
+  */
+  padding: 10px;
+  background: #1d2128;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.65);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+#mask #alert .alert-head {
+  width: 100%;
+  border-bottom: 2px solid #252a32;
+  color: #ffffff;
+  text-align: center;
+  padding-bottom: 10px;
+  letter-spacing: 2px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#mask #alert .alert-body {
+  width: 100%;
+  /* border-bottom: 2px solid #252a32; */
+  color: #fd4e67;
+  text-align: center;
+  padding: 30px 30px 50px;
+  letter-spacing: 2px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#mask #alert .alert-footer {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+#mask #alert .alert-footer .comfirm {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  margin-left: -25px;
+  margin-top: -20px;
+  border-radius: 50%;
+  background: #fd4e67;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: none;
+  outline: none;
+  color: #FFF;
+  /* box-shadow: 0 0 50px #fd4e67 */
+}
+
+#mask #alert .alert-footer .comfirm:nth-child(2) {
+  height: 90px;
+  width: 90px;
+  margin-left: -45px;
+  margin-top: -40px;
+  background: #fd4e6773;
+}
+
+#mask #alert .alert-footer .comfirm:nth-child(3) {
+  height: 130px;
+  width: 130px;
+  margin-left: -65px;
+  margin-top: -60px;
+  background: #fd4e672b;
 }
