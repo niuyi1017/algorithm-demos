@@ -1,5 +1,5 @@
 var mask = $('#mask')
-mask.hide(1)
+mask.hide()
 $(function() {
   var mask = $('#mask')
   var alert = $('#alert')
