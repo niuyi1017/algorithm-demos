@@ -11,3 +11,4 @@ $(function() {
     mask.fadeOut(300)
   })
 })
+//这两天光弄阿里云和linux了
