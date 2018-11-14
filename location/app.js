@@ -200,18 +200,14 @@ app.get('/locationlist', (req, res) => {
   })
 })
 
+let locationDetail = { 
+  addressComponent: {}
+}
 
 app.get('/detail', (req, res) =>{
   res.render('detail', {
     title: 'location 详情页',
-    location: {
-      country: '中国',
-      province: '山东省',
-      city: '济南市',
-      district: "高新区",
-      postcode: '251400',
-      detial: '山东省济南市高新区浪潮路1036号'
-    }
+    location: locationDetail
   })
 })
 
@@ -237,8 +233,15 @@ app.get('/locateuser', (req, res) => {
 })
 
 app.post('/recLocation', (req, res) => {
-  let locationData = req.body.dataStr.formattedAddress
+  let locationData = req.body.dataStr
   res.send(locationData)
-  console.log(locationData)
+  locationDetail = JSON.parse(locationData)
+  console.log(JSON.parse(locationData))
+})
+
+app.get('/getLocationData', (req, res) => {
+  
+  res.send(JSON.stringify(locationDetail))
+  
 })
 console.log('node-mongodb started on port: ' + port)  

@@ -16,18 +16,20 @@ block content
         #location
       .col-5
         dl.dl-horizontal
-          dt 国家
-          dd=location.country
           dt 省/自治区/直辖市
-          dd=location.province
+          dd=location.addressComponent.province
           dt 城市
-          dd=location.city
-          dt 街区
-          dd=location.district
-          dt 邮编
-          dd=location.postcode
+          dd=location.addressComponent.city
+          dt 区/县
+          dd=location.addressComponent.district
+          dt 街道/镇
+          dd=location.addressComponent.township
+          dt 街/村/路 门牌号
+          dd=location.addressComponent.street
+          dt 区号
+          dd=location.addressComponent.citycode
           dt 详细地址
-          dd=location.detial
+          dd=location.formattedAddress
     .row
       .col-12 &nbsp;
       .col-12 &nbsp;

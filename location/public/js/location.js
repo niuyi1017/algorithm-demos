@@ -18,16 +18,14 @@ $(function(){
     function onComplete(data) {
       var locationData = {
         addressComponent: {
-          adcode: data.addressComponent.adcode,
           city: data.addressComponent.city,
           citycode: data.addressComponent.citycode,
           district: data.addressComponent.district,
           province: data.addressComponent.province,
-          street: data.addressComponent.street,
-          streetNumber: data.addressComponent.streetNumber,
-          township: data.addressComponent.township
+          street: data.addressComponent.street + data.addressComponent.streetNumber,
+          township: data.addressComponent.township 
         },
-        formattedAddress: data.formattedAddress,
+        formattedAddress: data.formattedAddress ,
         position: data.position
       }
 
@@ -41,7 +39,7 @@ $(function(){
     function onError(data) {
       // 定位出错
       // locationData = data
-      // console.log(data)
+      console.log(data)
       
     }
   })
@@ -58,16 +56,8 @@ $(function(){
         dataStr
       },
       dataType:'json',
-      // jsonp:'callback',
       success: (data) => {
         console.log('success' + data)
-        // $('#inputTitle').val(data.title)
-        // $('#inputDirector').val(data.attrs.director[0])
-        // $('#inputCountry').val(data.attrs.country[0])
-        // $('#inputLanguage').val(data.attrs.language[0])
-        // $('#inputPoster').val(data.image)
-        // $('#inputYear').val(data.attrs.year)
-        // $('#inputSummary').val(data.summary)
 
       }
     })

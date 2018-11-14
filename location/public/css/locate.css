@@ -182,7 +182,7 @@ option {
 }
 
 #map {
-  display: none
+  display: none;
 }
 
 #mask {
@@ -209,6 +209,7 @@ option {
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  display: none;
 }
 
 #mask #alert .alert-head {
