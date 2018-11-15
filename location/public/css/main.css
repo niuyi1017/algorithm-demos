@@ -81,7 +81,9 @@
     transform: rotate(360deg);
   }
 }
-
+.btn{
+  outline: none
+}
 #bg {
   position: absolute;
   top: 0;
@@ -250,4 +252,7 @@ locationUrl {
   text-overflow: ellipsis;
   white-space: nowrap;
   word-break: break-all;
+}
+#Oloading, #OURL{
+  display: none;
 }

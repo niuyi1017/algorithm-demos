@@ -9,7 +9,7 @@ block content
         p &nbsp;
     .row.justify-content-end.admin-adduser
       .col-2
-        button.btn.btn-outline-dark.btn-block 刷 新
+        button.btn.btn-outline-dark.btn-block#refresh 刷 新
       .col-2
         button.btn.btn-outline-dark.btn-block(data-toggle="modal", data-target="#newlocationModal") 新 增 
     .row.justify-content-center
@@ -23,7 +23,7 @@ block content
             th 详细信息
             th 删除
           tbody
-            each item in users 
+            each item in locations 
               tr(class="item-id-#{item._id}")
                 td #{item.lid}
                 td #{moment(item.meta.updateAt).format('YYYY/MM/DD')}
@@ -48,34 +48,33 @@ block content
   #newlocationModal.modal.fade(role="dialog")
     .modal-dialog.modal-dialog-centered
       .modal-content
-        form(action="/user/signup", method="post")
-          .modal-header.justify-content-center
-            h5.modal-title#modal-title 新增定位
-          .modal-body.newlocation
-            .form-group.row
-              label.col-sm-2.col-form-label(for="inputUid") UID
-              .col-sm-10
-                input#inputUid.form-control(type="text", name="user[lid]", value=user.lid, readonly)
-            .form-group.row
-              label.col-sm-2.col-form-label(for="inputLid") LID
-              .col-sm-10
-                input#inputLid.form-control(type="text", name="location[lid]", value=location.lid)
-          .row.justify-content-center
-            .col-6
-              button.btn.btn-outline-secondary.btn-block(type="submit") 一键生成专属定位链接
-          .row.justify-content-center
-            .col-12 
-              p
-          .row.justify-content-center
-            .col-auto 
-              .loading
-          .row.justify-content-center
-            .col-10
-              textarea.form-control(rows="2") https://www.tianxiayijiaqin.com/location/locateuser?uid=1001&lid=011
-          .row.justify-content-center
-            .col-12 
-              p
-          .row.justify-content-center
-            .col-12 
-              p
-  script(src="/js/admin.js")
+        .modal-header.justify-content-center
+          h5.modal-title#modal-title 新增定位
+        .modal-body.newlocation
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputUid") UID
+            .col-sm-10
+              input#inputUid.form-control(type="text", name="location[uid]", value=1000, readonly)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputLid") 标识
+            .col-sm-10
+              input#inputLid.form-control(type="text", name="location[lid]")
+        .row.justify-content-center
+          .col-6
+            button.btn.btn-outline-secondary.btn-block#genURL 一键生成专属定位链接
+        .row.justify-content-center
+          .col-12 
+            p
+        .row.justify-content-center
+          .col-auto#Oloading
+            .loading
+        .row.justify-content-center
+          .col-10#OURL
+            textarea.form-control(rows="2")#url https://www.tianxiayijiaqin.com/location/locateuser?uid=1001&lid=011
+        .row.justify-content-center
+          .col-12 
+            p
+        .row.justify-content-center
+          .col-12 
+            p
+  script(src="/js/locationlist.js")

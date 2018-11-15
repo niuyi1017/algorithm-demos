@@ -20,12 +20,17 @@ app.locals.moment = require('moment')
 app.use(express.static(path.resolve(__dirname, 'public')))
 app.listen(port)
 
+
+
+//主页 
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'location 首页'
   })
 })
 
+
+// admin page == get userlist
 app.get('/admin', (req, res) => {
   res.render('admin', {
     title: 'location admin',
@@ -133,71 +138,86 @@ app.get('/admin', (req, res) => {
   })
 })
 
+// location list 
 
+let locations = [
+  {
+    lid: '1001001',
+    meta: {
+      updateAt: Date.now()
+    },
+    state: 1, //0 = 定位中， 1 = 定位完成 
+    _id: 32165465487
+  },
+  {
+    lid: '1001002',
+    meta: {
+      updateAt: Date.now()
+    },
+    state: 1,
+    _id: 32165465487
+  },
+  {
+    lid: '1001003',
+    meta: {
+      updateAt: Date.now()
+    },
+    state: 1,
+    _id: 32165465487
+  },
+  {
+    lid: '1001004',
+    meta: {
+      updateAt: Date.now()
+    },
+    state: 1,
+    _id: 32165465487
+  },
+  {
+    lid: '1001005',
+    meta: {
+      updateAt: Date.now()
+    },
+    state: 1,
+    _id: 32165465487
+  }
+]
 app.get('/locationlist', (req, res) => {
   res.render('locationlist', {
     title: 'location admin',
     user: {},
-    location:{},
-    users: [
-      {
-        lid: '1001001',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: 0,
-        _id: 32165465487
-      },
-      {
-        lid: '1001002',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: 1,
-        _id: 32165465487
-      },
-      {
-        lid: '1001003',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: 1,
-        _id: 32165465487
-      },
-      {
-        lid: '1001004',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: 1,
-        _id: 32165465487
-      },
-      {
-        lid: '1001005',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: 1,
-        _id: 32165465487
-      },
-      {
-        lid: '1001006',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: 1,
-        _id: 32165465487
-      },
-      {
-        lid: '1001007',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: 1,
-        _id: 32165465487
-      }
-    ]
+    locations
   })
+})
+
+//ajax createLocationLog
+app.post('/createLocationLog', (req, res) => {
+
+  let lid = req.body.lid
+  console.log(lid)
+  let result
+  let locatioinsLeng = locations.length
+  let location = {
+    lid,
+    meta: {
+      updateAt: Date.now()
+    },
+    state: 0,
+    _id: 32165465487
+  }
+  locations.unshift(location)
+  if (locations.length-locatioinsLeng == 1){
+    result = {
+      success: 1
+    }
+  }else{
+    result = {
+      err: 1
+    }
+  }
+  
+  res.send(result)
+
 })
 
 let locationDetail = { 
