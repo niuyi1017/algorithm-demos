@@ -185,7 +185,7 @@ let locations = [
 app.get('/locationlist', (req, res) => {
   res.render('locationlist', {
     title: 'location admin',
-    user: {},
+    // user: {},
     locations
   })
 })
@@ -215,35 +215,54 @@ app.post('/createLocationLog', (req, res) => {
       err: 1
     }
   }
-  
   res.send(result)
-
 })
 
+
+//location detail 
 let locationDetail = { 
   addressComponent: {}
 }
 
-app.get('/detail', (req, res) =>{
+app.get('/detail/:lid', (req, res) =>{
+  let locationDetail = {
+    addressComponent: {}
+  }
+  let lid = req.params.lid
+ 
+  for(let i = 0; i< locations.length; i ++){
+    if (lid == locations[i].lid){
+      locationDetail = locations[i].location
+      console.log('locationDetail[i]: ')
+      console.log(locationDetail)
+    }
+  }
   res.render('detail', {
     title: 'location 详情页',
+    
     location: locationDetail
   })
 })
 
+
+// user add
 app.get('/newuser', (req, res) => {
   res.render('newuser', {
     title: 'location new user',
     user: {}
   })
 })
-app.get('/newlocation', (req, res) => {
-  res.render('newlocation', {
-    title: 'location new location',
-    user: {},
-    location: {}
-  })
-})
+
+
+// app.get('/newlocation', (req, res) => {
+//   res.render('newlocation', {
+//     title: 'location new location',
+//     user: {},
+//     location: {}
+//   })
+// })
+
+//user located page on mobile
 app.get('/locateuser', (req, res) => {
   res.render('locateuser', {
     title: 'location new locateuser',
@@ -251,17 +270,42 @@ app.get('/locateuser', (req, res) => {
     location: {}
   })
 })
-
+//ajax location data 
 app.post('/recLocation', (req, res) => {
   let locationData = req.body.dataStr
-  res.send(locationData)
+  let lid = req.query.uid + req.query.lid
+  console.log('post :'+lid)
+  let result
   locationDetail = JSON.parse(locationData)
   console.log(JSON.parse(locationData))
+  
+  for(let i = 0; i<locations.length; i++){
+    if(locations[i].lid == lid){
+      locations[i].location = locationDetail
+      locations[i].state = 1
+      result = {
+        success: 1
+      }
+      break;
+    }
+  }
+
+  res.send(result)
+
+  
+  
 })
 
-app.get('/getLocationData', (req, res) => {
-  
-  res.send(JSON.stringify(locationDetail))
-  
+//ajax get location data 
+app.get('/getLocationData/:lid', (req, res) => {
+  let lid = req.params.lid
+  let locationDetail
+  for(let i = 0; i<locations.length; i++){
+    if (lid == locations[i].lid ){
+      locationDetail = JSON.stringify(locations[i])
+      res.send(locationDetail)
+      break
+    }
+  }
 })
 console.log('node-mongodb started on port: ' + port)  

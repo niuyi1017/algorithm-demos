@@ -24,7 +24,7 @@ block content
             th 删除
           tbody
             each item in locations 
-              tr(class="item-id-#{item._id}")
+              tr(class="item-id-"+item._id)
                 td #{item.lid}
                 td #{moment(item.meta.updateAt).format('YYYY/MM/DD')}
                 td #{moment(item.meta.updateAt).format('h:mm:ss a')}
@@ -34,11 +34,11 @@ block content
                   else 
                     p.text-success 已完成！
                 if item.state == 0 
-                  td: a.btn.btn-outline-secondary.btn-sm.disabled(target="_blank",href="../../movie/#{item._id}") 请 稍 后...
-                else 
-                  td: a.btn.btn-outline-warning.btn-sm(target="_blank",href="../../movie/#{item._id}") 点击查看
+                  td: a.btn.btn-outline-secondary.btn-sm.disabled 请 稍 后...
+                else
+                  td: a.btn.btn-outline-warning.btn-sm(target="_blank" href="../../detail/"+item.lid) 点击查看
                 td 
-                  button.btn.btn-outline-danger.btn-sm.del(type="button",data-id="#{item._id}")  删 &nbsp; 除
+                  button.btn.btn-outline-danger.btn-sm.del(type="button",data-id=item._id)  删 &nbsp; 除
     .row
       .col-12 
         span &nbsp;

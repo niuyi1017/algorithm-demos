@@ -44,10 +44,12 @@ $(function(){
     }
   })
   function postData(data) {
+    var search = window.location.search
+    console.log(search)
     var dataStr = JSON.stringify(data)
     console.log(dataStr)
     $.ajax({
-      url: '/recLocation',
+      url: '/recLocation' + search,
       method: 'POST',
       dataType: 'jsonp',
       cache: true,

@@ -4,7 +4,7 @@ $(function(){
   var OURL = $('#OURL')
   var refresh = $('#refresh')
   var url = $('#url')
-  var baseUrl = 'https://www.tianxiayijiaqin.com/location/locateuser?lid=' 
+  var baseUrl = 'http://localhost:3000/locateuser?lid=' 
 
   refresh.click(function(){
     window.location.reload()
@@ -46,8 +46,6 @@ $(function(){
           }
         }
       })
-     
-      // return false
     }else {
       alert("请先填写定位标识")
       genURL.html('一键生成专属定位链接')
