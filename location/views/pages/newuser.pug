@@ -13,9 +13,9 @@ block content
           p &nbsp;
     .row.justify-content-center
       .col-6.newuser
-        form.form-horizonal(action="/admin/new", method="post", enctype="multipart/form-data")
+        form.form-horizonal(action="/admin/new", method="post")
           if user._id
-            input(type="hidden",name="movie[_id]",value=user._id)
+            input(type="hidden",name="user[_id]",value=user._id)
           .form-group.row
             label.col-sm-2.col-form-label(for="inputTitle") UID
             .col-sm-10

@@ -2,13 +2,17 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const underscore = require('underscore')
 
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
-
+const User = require('./models/user')
 const port = process.env.port || 3000
 const app = express()
+
+const dbUrl = 'mongodb://localhost/location'
+mongoose.connect(dbUrl, { useNewUrlParser: true })
 
 app.set('views', './views/pages')
 app.set('view engine', 'pug')
@@ -20,125 +24,6 @@ app.locals.moment = require('moment')
 app.use(express.static(path.resolve(__dirname, 'public')))
 app.listen(port)
 
-
-
-//主页 
-app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'location 首页'
-  })
-})
-
-
-// admin page == get userlist
-app.get('/admin', (req, res) => {
-  res.render('admin', {
-    title: 'location admin',
-    users: [
-      {
-        uid: '1000',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1001',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1002',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1003',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1004',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1005',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1006',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1007',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      },
-      {
-        uid: '1008',
-        mobile: '15953157925',
-        password: '123456',
-        notice: '无',
-        meta: {
-          updateAt: Date.now()
-        },
-        state: '正常',
-        _id: 32165465487
-      }
-    ]
-  })
-})
-
-// location list 
 
 let locations = [
   {
@@ -182,6 +67,84 @@ let locations = [
     _id: 32165465487
   }
 ]
+
+//主页 
+app.get('/', (req, res) => {
+  res.render('index', {
+    title: 'location 首页'
+  })
+})
+
+
+// admin page == get userlist
+app.get('/admin', (req, res) => {
+  User.fetch((err, users) => {
+    if (err) {
+      console.log(err)
+    }
+    res.render('admin', {
+      title: 'admin manager',
+      users
+    })
+  })
+})
+
+// user add
+app.get('/admin/newuser', (req, res) => {
+
+  res.render('newuser', {
+    title: 'new user',
+    user: {}
+  })
+})
+
+//delete user
+app.delete('/admin', (req, res) =>{
+  let id = req.query.id
+  if (id) {
+    User.deleteOne({ _id: id }, (err, user) => {
+      if (err) {
+        console(err)
+      }
+      else {
+        res.json({ success: 1 })
+      }
+    })
+  }
+})
+//update user
+app.get('/admin/updateuser/:id', (req, res) => {
+  res.render('newuser', {
+    title: 'update user',
+  })
+})
+//new user form post
+app.post('/admin/new', (req, res) => {
+  let _user = req.body.user
+  console.log(_user)
+  User.findOne({ name: _user.uid }, (err, user) => {
+    if (err) {
+      console.log(err)
+    }
+    if (user) {
+      return res.redirect('/')
+    } else {
+      let user = new User(_user)
+      user.save((err, user) => {
+        if (err) {
+          console.log(err)
+        }
+        res.redirect('/admin')
+      })
+    }
+  })
+
+
+
+})
+// location list 
+
+
 app.get('/locationlist', (req, res) => {
   res.render('locationlist', {
     title: 'location admin',
@@ -245,22 +208,6 @@ app.get('/detail/:lid', (req, res) =>{
 })
 
 
-// user add
-app.get('/newuser', (req, res) => {
-  res.render('newuser', {
-    title: 'location new user',
-    user: {}
-  })
-})
-
-
-// app.get('/newlocation', (req, res) => {
-//   res.render('newlocation', {
-//     title: 'location new location',
-//     user: {},
-//     location: {}
-//   })
-// })
 
 //user located page on mobile
 app.get('/locateuser', (req, res) => {
@@ -289,11 +236,7 @@ app.post('/recLocation', (req, res) => {
       break;
     }
   }
-
   res.send(result)
-
-  
-  
 })
 
 //ajax get location data 
