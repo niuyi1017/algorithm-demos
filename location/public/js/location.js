@@ -29,16 +29,11 @@ $(function(){
         position: data.position
       }
 
-      console.log('data: ')
-      console.log(data)
-      console.log('locationData: ')
-      console.log(locationData)
       postData(locationData)
      
     }
     function onError(data) {
       // 定位出错
-      // locationData = data
       console.log(data)
       
     }

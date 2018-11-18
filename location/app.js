@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const underscore = require('underscore')
+const _ = require('underscore')
 
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
@@ -75,7 +75,6 @@ app.get('/', (req, res) => {
   })
 })
 
-
 // admin page == get userlist
 app.get('/admin', (req, res) => {
   User.fetch((err, users) => {
@@ -88,23 +87,21 @@ app.get('/admin', (req, res) => {
     })
   })
 })
-
 // user add
 app.get('/admin/newuser', (req, res) => {
-
   res.render('newuser', {
     title: 'new user',
     user: {}
   })
 })
 
-//delete user
-app.delete('/admin', (req, res) =>{
+delete user
+app.delete('/admin/del', (req, res) =>{
   let id = req.query.id
   if (id) {
     User.deleteOne({ _id: id }, (err, user) => {
       if (err) {
-        console(err)
+        console.log(err)
       }
       else {
         res.json({ success: 1 })
@@ -114,37 +111,54 @@ app.delete('/admin', (req, res) =>{
 })
 //update user
 app.get('/admin/updateuser/:id', (req, res) => {
-  res.render('newuser', {
-    title: 'update user',
-  })
+  let id = req.params.id
+  if (id) {
+    User.findById(id, (err, user) => {
+      if (err) {
+        console.log(err)
+      }
+      res.render('newuser', {
+        title: 'update user',
+        user
+      })
+    })
+  }
 })
 //new user form post
 app.post('/admin/new', (req, res) => {
-  let _user = req.body.user
-  console.log(_user)
-  User.findOne({ name: _user.uid }, (err, user) => {
-    if (err) {
-      console.log(err)
-    }
-    if (user) {
-      return res.redirect('/')
-    } else {
-      let user = new User(_user)
-      user.save((err, user) => {
+  let id = req.body.user._id
+  let userObj = req.body.user
+  let _user
+  if (id) {
+    User.findById(id, (err, user) => {
+      if (err) {
+        console.log(err)
+      }
+      _user = _.extend(user, userObj)
+      _user.save((err, user) => {
         if (err) {
           console.log(err)
         }
         res.redirect('/admin')
       })
-    }
-  })
-
-
-
+    })
+  }else {
+    _user = new User({
+      uid: userObj.uid,
+      password: userObj.password,
+      state: userObj.state,
+      notice: userObj.notice
+    })
+    _user.save((err, user) => {
+      if (err) {
+        console.log(err)
+      }
+      res.redirect('/admin')
+    })
+  }
 })
+
 // location list 
-
-
 app.get('/locationlist', (req, res) => {
   res.render('locationlist', {
     title: 'location admin',
