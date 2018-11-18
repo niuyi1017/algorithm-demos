@@ -4,7 +4,7 @@
       a.navbar-brand(href="/") #{title}
     if user
       p.navbar-text.navbar-right.navbar-nav
-        span.nav-item 欢迎您 #{user.name}
+        span.nav-item 欢迎您 #{user.uid}
         span &nbsp; | &nbsp;
         a.nav-item(href="/logout") 退出登录
     else
@@ -13,15 +13,15 @@
 #signinModal.modal.fade(role="dialog")
   .modal-dialog.modal-dialog-centered
     .modal-content
-      form(action="/user/signup", method="post")
+      form(action="/login", method="post")
         .modal-header 
           h5.modal-title#modal-title 登录
         .modal-body 
           .form-group
             .row.justify-content-center
               .col-2
-                label(for="signupName") 用户名
-              input#signupName.form-contol.col-6(type="text",name="user[name]",)
+                label(for="signupName") UID
+              input#signupName.form-contol.col-6(type="text",name="user[uid]",)
           .form-group
             .row.justify-content-center
               .col-2
