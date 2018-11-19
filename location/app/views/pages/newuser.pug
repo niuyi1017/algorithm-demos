@@ -19,15 +19,15 @@ block content
           .form-group.row
             label.col-sm-2.col-form-label(for="inputTitle") UID
             .col-sm-10
-              input#inputTitle.form-control(type="text", name="user[uid]", value=user.uid)
+              input#inputTitle.form-control(type="text", name="user[uid]", value=user.uid,placeholder="请输入大于1000的四位数字，禁止与已有UID的重复")
           .form-group.row
             label.col-sm-2.col-form-label(for="inputPassword") 密码
             .col-sm-10
-              input#inputDirector.form-control(type="text", name="user[password]", value=user.password)
+              input#inputDirector.form-control(type="text", name="user[password]", value=user.password,placeholder="请输入6-8位数字或字母")
           .form-group.row
             label.col-sm-2.col-form-label(for="inputState") 状态
             .col-sm-10
-              input#inputCountry.form-control(type="text", name="user[state]", value=user.state)
+              input#inputCountry.form-control(type="text", name="user[state]", value=user.state,placeholder="请输入0或1（0为冻结状态，1为正常状态）")
           .form-group.row
             label.col-sm-2.col-form-label(for="inputNotice") 备注
             .col-sm-10

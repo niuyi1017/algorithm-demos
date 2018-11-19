@@ -44,16 +44,14 @@ exports.admin = (req, res) => {
       console.log(err)
     }
     res.render('admin', {
-      title: 'admin manager',
+      title: '总控制台',
       users
     })
   })
 }
 // user/locationlist
 exports.locationList = (req, res) => {
-  // let uid = req.session.user.uid
   let id = req.session.user._id
-  console.log(id)
   User.findById(id, (err, user) => {
     if (err) {
       console.log(err)
@@ -64,9 +62,8 @@ exports.locationList = (req, res) => {
               if (err) {
                 console.log(err)
               }
-              console.log(locations)
               res.render('locationlist', {
-                title: 'location admin',
+                title: '定位记录控制台',
                 locations
               })
             })
@@ -75,7 +72,7 @@ exports.locationList = (req, res) => {
 
 exports.newUser = (req, res) => {
   res.render('newuser', {
-    title: 'new user',
+    title: '添加新分发者',
     user: {}
   })
 }
@@ -101,7 +98,7 @@ exports.updateUser = (req, res) => {
         console.log(err)
       }
       res.render('newuser', {
-        title: 'update user',
+        title: '更改分发者信息',
         user
       })
     })
@@ -143,7 +140,7 @@ exports.saveUser = (req, res) => {
 //user signinREquired
 exports.signinRequired = (req, res, next) => {
   let user = req.session.user
-  if (!user) {
+  if (!user || user.state == 0) {
     return res.redirect('/')
   }
   next()

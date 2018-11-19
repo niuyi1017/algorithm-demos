@@ -4,7 +4,10 @@
       a.navbar-brand(href="/") #{title}
     if user
       p.navbar-text.navbar-right.navbar-nav
-        span.nav-item 欢迎您 #{user.uid}
+        if user.uid == 1000
+          span.nav-item.text-info 欢迎您：管理员 #{user.uid}
+        else 
+          span.nav-item.text-info 欢迎您：#{user.uid}
         span &nbsp; | &nbsp;
         a.nav-item(href="/logout") 退出登录
     else

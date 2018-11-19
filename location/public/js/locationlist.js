@@ -57,6 +57,6 @@ $(function(){
           .addClass('btn-outline-secondary')
           .removeClass('btn-info')
           .attr('disabled',false)
-    var lid = $('#inputLid').val("")
+    $('#inputLid').val("")
   })
 })

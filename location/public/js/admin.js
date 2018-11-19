@@ -5,7 +5,6 @@ $(function () {
   })
 
   $('.del').click(function (e) {
-    console.log(e.target)
     let target = $(e.target)
     let id = target.data('id')
     let tr = $('.item-id-' + id)

@@ -28,21 +28,15 @@ $(function(){
         formattedAddress: data.formattedAddress ,
         position: data.position
       }
-
       postData(locationData)
-     
     }
     function onError(data) {
-      // 定位出错
       console.log(data)
-      
     }
   })
   function postData(data) {
     var search = window.location.search
-    console.log(search)
     var dataStr = JSON.stringify(data)
-    console.log(dataStr)
     $.ajax({
       url: '/recLocation' + search,
       method: 'POST',
@@ -54,10 +48,8 @@ $(function(){
       },
       dataType:'json',
       success: (data) => {
-        console.log('success' + data)
-
+        console.log('success')
       }
     })
-    console.log('ajax' + data)
   }
 })

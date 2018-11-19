@@ -29,26 +29,17 @@ module.exports = (app) => {
   // location list 
   app.get('/user/locationlist', User.signinRequired, User.locationList)
 
+
+  //location 
+
   //ajax createLocationLog
-  app.post('/createLocationLog', Location.createLocationLog)
-
-
-  //location detail 
-  // let locationDetail = {
-  //   addressComponent: {}
-  // }
-
-  app.get('/detail/:id', Location.detail)
-
+  app.post('/createLocationLog', User.signinRequired, Location.createLocationLog)
+ //detail page
+  app.get('/detail/:id', User.signinRequired, Location.detail)
   //user located page on mobile
   app.get('/locateuser', Location.locateUser)
   //ajax location data 
   app.post('/recLocation', Location.recLocation)
-
-  //ajax get location data 
-  app.get('/getLocationData/:id', Location.getLocationData)
-
-
-
-
+  //ajax get location data for map
+  app.get('/getLocationData/:id',  User.signinRequired,Location.getLocationData)
 }

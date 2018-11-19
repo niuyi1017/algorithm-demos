@@ -18,19 +18,26 @@ block content
           p 地图加载中...
       .col-5
         dl.dl-horizontal
-          dt 省/自治区/直辖市
+          dt
+            span.text-info 省/自治区/直辖市
           dd=location.addressComponent.province
-          dt 城市
+          dt
+            span.text-info 城市
           dd=location.addressComponent.city
-          dt 区/县
+          dt
+            span.text-info 区/县
           dd=location.addressComponent.district
-          dt 街道/镇
+          dt 
+            span.text-info  街道/镇
           dd=location.addressComponent.township
-          dt 街/村/路 门牌号
+          dt
+            span.text-info 街/村/路 门牌号
           dd=location.addressComponent.street
-          dt 区号
+          dt
+            span.text-info 区号
           dd=location.addressComponent.citycode
-          dt 详细地址
+          dt
+            span.text-info 详细地址
           dd=location.formattedAddress
     .row
       .col-12 &nbsp;
