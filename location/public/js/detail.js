@@ -5,18 +5,18 @@ $(function(){
   }
 
   var pathname = window.location.pathname
-  var lid = pathname.split('/')[2]
+  var id = pathname.split('/')[2]
 
   $.ajax({
     method:"GET",
-    url:'/getLocationData/' + lid,
+    url:'/getLocationData/' + id,
     dataType:'json',
     success: function(data){
       console.log(data)
-      mapOptions.center = [data.location.position.lng, data.location.position.lat]
+      mapOptions.center = [data.lng, data.lat]
       var map = new AMap.Map('location', mapOptions)
-      var p = data.location.position.P
-      var o = data.location.position.O
+      var p = data.P
+      var o = data.O
       console.log(p)
       var marker = new AMap.Marker({
         position: new AMap.LngLat(p, o),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]

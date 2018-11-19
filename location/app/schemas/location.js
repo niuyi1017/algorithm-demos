@@ -1,19 +1,21 @@
 const mongoose = require('mongoose')
-const userSchema = new mongoose.Schema({
-  uid: {
+const Schema = mongoose.Schema
+const ObjectId = Schema.Types.ObjectId
+const locationSchema = new mongoose.Schema({
+  lid: {
     unique: true,
-    type: Number
+    type: String
   },
-  //Role:
-  // 1000: admin
-  // >1000: nomal user
-  // <1000: super admin 
-  password: String,
+  user:{
+    type: ObjectId,
+    ref: 'User'
+  },
+  uid: String,
   state: {
     type: Number,
-    default: 1
+    default: 0  //0为定位中， 1为定位成功
   },
-  notice: String,
+  locationMsg: String,
   meta: {
     createAt: {
       type: Date,
@@ -27,7 +29,7 @@ const userSchema = new mongoose.Schema({
 })
 
 // 注意！！！schema中不可用 ES6箭头函数 ，否则 this = undefined
-userSchema.pre('save', function (next) {
+locationSchema.pre('save', function (next) {
   // let user = this
   if (this.isNew) {
     this.meta.createAt = this.meta.updateAt = Date.now()
@@ -37,22 +39,11 @@ userSchema.pre('save', function (next) {
   next()
 })
 
-userSchema.methods = {
-  comparePassword: function (_password, cb) {
-    
-    if (_password == this.password){
-      cb(null, "isMath")
-    }else{
-      return cb("err")
-    }
-  }
-}
-
-userSchema.statics = {
+locationSchema.statics = {
   fetch: function (cb) {
     return this
       .find({})
-      .sort('uid')
+      .sort('meta.updateAt')
       .exec(cb)
   },
   findById: function (id, cb) {
@@ -61,4 +52,4 @@ userSchema.statics = {
       .exec(cb)
   }
 }
-module.exports = userSchema
+module.exports = locationSchema

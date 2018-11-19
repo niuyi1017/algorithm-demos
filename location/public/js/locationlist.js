@@ -17,7 +17,7 @@ $(function(){
       genURL.attr("disabled", true)
       Oloading.slideDown(300)
 
-      var uid = '1001'
+      var uid = $('#inputUid').val()
       var urlValue = baseUrl+ lid + '&uid='+ uid 
       
       $.post({

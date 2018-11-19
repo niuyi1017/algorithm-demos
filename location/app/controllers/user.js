@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Location = require('../models/location')
 const _ = require('underscore')
 
 exports.login = (req, res) => {
@@ -23,7 +24,7 @@ exports.login = (req, res) => {
         if(user.uid <= 1000){
           return res.redirect('/admin')
         }else{
-          return res.redirect('/locationlist')
+          return res.redirect('/user/locationlist')
         }
       } else {
         console.log("Password is not matched!")
@@ -46,6 +47,29 @@ exports.admin = (req, res) => {
       title: 'admin manager',
       users
     })
+  })
+}
+// user/locationlist
+exports.locationList = (req, res) => {
+  // let uid = req.session.user.uid
+  let id = req.session.user._id
+  console.log(id)
+  User.findById(id, (err, user) => {
+    if (err) {
+      console.log(err)
+    }
+    Location.find({user: id})
+            .populate('uid', 'uid')
+            .exec((err, locations) => {
+              if (err) {
+                console.log(err)
+              }
+              console.log(locations)
+              res.render('locationlist', {
+                title: 'location admin',
+                locations
+              })
+            })
   })
 }
 
@@ -132,3 +156,4 @@ exports.adminRequired = (req, res, next) => {
   }
   next()
 }
+

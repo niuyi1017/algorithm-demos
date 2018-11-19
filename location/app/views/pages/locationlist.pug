@@ -36,7 +36,7 @@ block content
                 if item.state == 0 
                   td: a.btn.btn-outline-secondary.btn-sm.disabled 请 稍 后...
                 else
-                  td: a.btn.btn-outline-warning.btn-sm(target="_blank" href="../../detail/"+item.lid) 点击查看
+                  td: a.btn.btn-outline-warning.btn-sm(target="_blank" href="../../detail/"+item._id) 点击查看
                 td 
                   button.btn.btn-outline-danger.btn-sm.del(type="button",data-id=item._id)  删 &nbsp; 除
     .row
@@ -54,7 +54,7 @@ block content
           .form-group.row
             label.col-sm-2.col-form-label(for="inputUid") UID
             .col-sm-10
-              input#inputUid.form-control(type="text", name="location[uid]", value=1000, readonly)
+              input#inputUid.form-control(type="text", name="location[uid]", value=user.uid, readonly)
           .form-group.row
             label.col-sm-2.col-form-label(for="inputLid") 标识
             .col-sm-10
