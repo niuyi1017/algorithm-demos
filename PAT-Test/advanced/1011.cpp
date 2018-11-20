@@ -1,9 +1,5 @@
 #include <iostream>
-
 using namespace std;
-
-
-
 main(int argc, char const *argv[])
 {   
     char arr[3];
