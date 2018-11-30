@@ -1,67 +1,86 @@
-#include<iostream>
-
+#include <iostream>
+#include <vector>
+#include <queue>
 using namespace std;
-
-int B[25][1010] = {0};//bank;
-int T[1010] = {0};//Time
-int TotalTime[25] = {0};
-
-
-int main(int argc, char const *argv[])
+struct node
 {
-    int n,m,k,q;
-    cin>>n>>m>>k>>q;
-    
-    for(int  i = 1; i <=k; i++)
+    int popTime, endTime;
+    queue<int> q;
+};
+
+int main()
+{
+    int n, m, k, q;
+    scanf("%d%d%d%d", &n, &m, &k, &q); //n个窗口，每个窗口可以排m人，一共K个人需要被服务，最后查询q个人的离开时间
+    int index = 1;
+
+    vector<int> time(k + 1), result(k + 1);
+    for (int i = 1; i <= k; i++)
     {
-       cin>>T[i];
+        scanf("%d", &time[i]);
     }
+    vector<node> window(n + 1);
+    vector<bool> sorry(k + 1, false);
 
-    for(int i = 1;i<=k;i++){
-       
-        if (i <= n * m)
+    for (int i = 1; i <= m; i++)
+    { //铺满前 m*n 个人
+        for (int j = 1; j <= n; j++)
         {
-            int temp = i % n;
-            B[temp][i] = T[i];
-            cout << "B[temp][i] = " << B[temp][i]<<endl;
-       }
-       else
-       {
-           for (int j = 0; j < n; j++)
-           {
-               for (int a = 0; a < m; a++)
-               {
-                   TotalTime[j] += B[j][a];
-               }
-               cout <<j<< "  TotalTime = " << TotalTime[j]<<endl;
-           }
-
-           int minIndex = 0;
-           for(int j = 0;j<n;j++){
-               if(TotalTime[j]<=TotalTime[minIndex]){
-                   minIndex = j;
-               }
-           }
-           B[minIndex][i] = T[i];
-           cout << "B[minIndex][i] = " << B[minIndex][i] << endl;
-       }
-       
-       
+            if (index <= k)
+            {
+                window[j].q.push(time[index]);
+                if (window[j].endTime >= 540)
+                {
+                    sorry[index] = true;
+                }
+                window[j].endTime += time[index];
+                if (i == 1)
+                {
+                    window[j].popTime = window[j].endTime;
+                }
+                result[index] = window[j].endTime;
+                index++;
+            }
+        }
     }
-    int check[1008];
+
+    while (index <= k)
+    {
+        int tempmin = window[1].popTime, tempWindow = 1;
+        for (int i = 2; i <= n; i++)
+        {
+            if (window[i].popTime < tempmin)
+            {
+                tempmin = window[i].popTime;
+                tempWindow = i;
+            }
+        }
+        window[tempWindow].q.pop();
+        window[tempWindow].q.push(time[index]);
+        window[tempWindow].popTime += window[tempWindow].q.front();
+        if (window[tempWindow].endTime >= 540)
+        {
+            sorry[index] = true;
+        }
+        window[tempWindow].endTime += time[index];
+        result[index] = window[tempWindow].endTime;
+
+        index++;
+    }
+
     for (int i = 1; i <= q; i++)
     {
-        cin>>check[i];
-    }
-    int index,winIndex,pTime;
-    for(int i = 1;i<=q;i++){
-        winIndex = check[i]%n;
-        for(int j = 0;j<=check[j];j++){
-            pTime +=B[winIndex][j]; 
-            
+        int query, minutes;
+        cin >> query;
+        minutes = result[query];
+        if (sorry[query] == true)
+        {
+            printf("Sorry\n");
         }
-        cout << pTime << " ";
+        else
+        {
+            printf("%02d:%02d\n", (minutes + 480) / 60, (minutes + 480) % 60);
+        }
     }
-
     return 0;
 }
