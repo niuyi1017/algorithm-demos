@@ -16,10 +16,10 @@ int main(int argc, char const *argv[])
   fill(e[0],e[0]+510*510,inf);
   fill(dis,dis+510,inf);
   scanf("%d%d%d%d", &cmax, &n, &sp, &m);
-  for (int i = 1; i <= n; i++)
-  {
-    scanf("%d", &weight[i]);
-    weight[i] = weight[i] - cmax / 2;
-  }
+  // for (int i = 1; i <= n; i++)
+  // {
+  //   scanf("%d", &weight[i]);
+  //   weight[i] = weight[i] - cmax / 2;
+  // }
   return 0;
 }
