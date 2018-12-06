@@ -1,1 +1,1 @@
-    for (int i = 1; i <= n; i++)
+printf("%d", arr[length-1]);

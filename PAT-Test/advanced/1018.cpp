@@ -49,13 +49,13 @@ int main()
 {
   fill(e[0],e[0]+510*510,inf);
   fill(dis,dis+510,inf);
-  scanf("%d%d%d%d", &cmax, &n, &sp, &m);
+  scanf("%d%d%d%d", &cmax, &n, &sp, &m); // n 车站， sp问题车站，  m条边
   for (int i = 1; i <= n; i++)
   {
     scanf("%d", &weight[i]);
     weight[i] = weight[i] - cmax / 2;
   }
-  for (int i = 0;i < m;i++ ){
+  for (int i = 0;i < m;i++ ){ // m 边
     int a , b;
     scanf("%d%d", &a,&b);
     scanf("%d",&e[a][b]);
@@ -64,7 +64,8 @@ int main()
   dis[0] = 0;
   for(int i = 0; i<=n; i++){
     int u = -1, minn = inf;
-    for(int j = 0; j<=n; j++){
+    for (int j = 0; j <= n; j++) //遍历原点到所有节点的距离，求出最短距离是到 u 顶点，距离为 minn
+    { 
       if(visit[j] == false && dis[j] < minn){
         u = j;
         minn = dis[j];
