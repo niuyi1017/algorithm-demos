@@ -4,8 +4,8 @@
 
 using namespace std;
 
-int n, maxHeight;
-vector<vector<int>> v;
+int n, maxHeight;//n 节点个数，
+vector<vector<int>> v;//类似二维数组，V为整个图，V里的每一个元素是一个节点，每个节点又储存这和这个节点想连的其他节点；
 bool visit[10010];
 vector<int> temp;
 set<int> s;
