@@ -1,1 +1,1 @@
-printf("%d", arr[length-1]);
+str

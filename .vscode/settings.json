@@ -1,5 +1,7 @@
 {
     "files.associations": {
         "limits": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "C_Cpp.errorSquiggles": "Disabled"
 }
