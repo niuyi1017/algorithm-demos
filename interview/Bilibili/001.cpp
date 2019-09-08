@@ -1,10 +1,18 @@
 #include <iostream>
-#include <vector> //容器  
+
 
 
 using namespace std;
 
-vector<int> v;
+
 
 int main(){
+
+int a = 40;
+if(a>=60){
+  printf("pass");
+}else{
+  printf("fail");
+}
+return 0;
 }

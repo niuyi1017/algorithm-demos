@@ -72,13 +72,13 @@
                     "c:/mingw/bin/../lib/gcc/mingw32/6.3.0/include",
                     "c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../include",
                     "c:/mingw/bin/../lib/gcc/mingw32/6.3.0/include-fixed"
-                    
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
             },
             "cStandard": "c11",
-            "cppStandard": "c++17"
+            "cppStandard": "c++17",
+            "compilerPath": "C:\\MinGW\\bin\\gcc.exe"
         }
     ],
     "version": 4
